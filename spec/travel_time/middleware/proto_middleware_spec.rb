@@ -6,7 +6,8 @@ RSpec.describe TravelTime::Middleware::ProtoMiddleware do
       env.request_headers = Faraday::Utils::Headers.new
     end
   end
-  let(:middleware) { described_class.new }
+  let(:app) { instance_double(Faraday::Middleware) }
+  let(:middleware) { described_class.new(app) }
 
   it 'adds basic auth header' do
     middleware.on_request(faraday_env)
